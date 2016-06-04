@@ -5,16 +5,21 @@
 ;; Use this file in place of ~/.emacs (which is loaded as well.)
 
 ;;(setq package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")))
-(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-20080305.34/")
-(add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized-master/")
-(require 'color-theme)
-(require 'color-theme-solarized)
-(color-theme-initialize)
 
-;; set dark theme
-(color-theme-solarized-dark)
-;; set light theme
-;; (color-theme-solarized-light)	     
+(if (display-graphic-p)
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/elpa/color-theme-20080305.34/")
+      (add-to-list 'load-path "~/.emacs.d/emacs-color-theme-solarized-master/")
+      (require 'color-theme)
+      (require 'color-theme-solarized)
+      (color-theme-initialize)
+
+      ;; set dark theme
+      (color-theme-solarized-dark)
+      ;; set light theme
+      ;; (color-theme-solarized-light)
+    )
+)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -37,9 +42,9 @@
   (setq indent-tabs-mode nil))
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-(add-hook 'c-mode-common-hook 
+(add-hook 'c-mode-common-hook
 	  (lambda () (define-key c-mode-base-map (kbd "C-c C-l") 'compile)))
-(add-hook 'c-mode-common-hook 
+(add-hook 'c-mode-common-hook
 	  (lambda () (define-key c-mode-base-map (kbd "<f4>") 'recompile)))
 
 (custom-set-variables
@@ -47,9 +52,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (tsdh-dark)))
- '(inhibit-startup-screen t)
+;; '(ansi-color-names-vector ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+;; '(custom-enabled-themes (quote (tsdh-dark)))
  '(load-home-init-file t t))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -93,21 +97,7 @@
 (show-paren-mode 1)     ;; show matching parens
 (setq line-number-mode t) ;; display line number
 (setq column-number-mode t) ;; display column number
-
-;; (custom-set-faces
-;;   ;; custom-set-faces was added by Custom.
-;;   ;; If you edit it by hand, you could mess it up, so be careful.
-;;   ;; Your init file should contain only one such instance.
-;;   ;; If there is more than one, they won't work right.
-;;  '(cursor ((t (:background "red"))))
-;;  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "cornflowerblue"))))
-;;  '(font-lock-comment-face ((((class color) (min-colors 88) (background dark)) (:foreground "salmon"))))
-;;  '(font-lock-constant-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightskyblue1"))))
-;;  '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightskyblue1"))))
-;;  '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "palegreen1"))))
-;;  '(font-lock-string-face ((nil (:foreground "orchid"))))
-;;  '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "lightskyblue1"))))
-;;  '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "grey")))))
+(setq inhibit-startup-screen t)
 
 (global-set-key [?\C-.] (lambda () (interactive) (scroll-down 1)))
 (global-set-key [?\C-,] (lambda () (interactive) (scroll-up 1)))
@@ -131,23 +121,3 @@
 
 (add-to-list 'load-path "/Users/misha/emacs-packages/")
 (require 'protobuf-mode)
-
-;; RUBY STUFF
-;(add-to-list 'load-path "/home/misha/emacs_packages/ruby-mode.el")
-;(autoload 'ruby-mode "ruby-mode" "Major mmode for editing ruby scripts." t)
-;;(setq auto-mode-alist (const '(".rb$" . ruby-mode) auto-mode-alist))
-
-;; COLOR THEMES
-;(add-to-list 'load-path "/home/misha/emacs_packages/color-theme-6.6.0")
-
-;; (require 'color-theme)
-;;   (eval-after-load "color-theme"
-;;     '(progn
-;;        (color-theme-initialize)
-;;        (color-theme-vim-colors)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
